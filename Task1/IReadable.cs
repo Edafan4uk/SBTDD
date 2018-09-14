@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace Task1
 {
-    class Program
+    interface IReadable
     {
-        static void Main(string[] args)
-        {
-            
-        }
+        void Read(string Path);
     }
 }
