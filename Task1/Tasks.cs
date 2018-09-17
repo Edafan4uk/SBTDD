@@ -11,14 +11,14 @@ namespace Task1
     {
         private static List<Currency> currencies;
         private static List<Currency> totAmount;
-        internal static void ReadFromFile()
+        internal static void ReadFromFile(string path)
         {
             try
             {
                 List<Currency> list = new List<Currency>();
-                if (!File.Exists(@"D:\HUGE Project\SBTDD\Task1\ReadFromHere.txt"))
+                if (!File.Exists(@path))
                     throw new FileNotFoundException();
-                using (StreamReader sr = File.OpenText(@"D:\HUGE Project\SBTDD\Task1\ReadFromHere.txt"))
+                using (StreamReader sr = File.OpenText(@path))
                 {
                     Currency tempCurr;
                     while(!sr.EndOfStream)
