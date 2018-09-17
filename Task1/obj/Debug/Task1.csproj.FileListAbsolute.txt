@@ -5,3 +5,10 @@ C:\Users\Taras\source\repos\Task1\Task1\obj\Debug\Task1.csprojResolveAssemblyRef
 C:\Users\Taras\source\repos\Task1\Task1\obj\Debug\Task1.csproj.CoreCompileInputs.cache
 C:\Users\Taras\source\repos\Task1\Task1\obj\Debug\Task1.exe
 C:\Users\Taras\source\repos\Task1\Task1\obj\Debug\Task1.pdb
+D:\HUGE Project\SBTDD\Task1\obj\Debug\Task1.csprojAssemblyReference.cache
+D:\HUGE Project\SBTDD\Task1\obj\Debug\Task1.csproj.CoreCompileInputs.cache
+D:\HUGE Project\SBTDD\Task1\obj\Debug\Task1.exe
+D:\HUGE Project\SBTDD\Task1\obj\Debug\Task1.pdb
+D:\HUGE Project\SBTDD\Task1\bin\Debug\Task1.exe.config
+D:\HUGE Project\SBTDD\Task1\bin\Debug\Task1.exe
+D:\HUGE Project\SBTDD\Task1\bin\Debug\Task1.pdb

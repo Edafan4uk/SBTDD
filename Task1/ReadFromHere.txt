@@ -1,6 +1,8 @@
 ﻿1488 grn
-228 dol
-1337 eur
+228 grn
+1337 grn
 500 grn
 64 grn
 332 dol
+400 eur
+834 eur
