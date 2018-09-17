@@ -7,7 +7,7 @@ using System.IO;
 
 namespace Task1
 {
-    class Currency: IReadable
+    class Currency : IReadable
     {
         public string CurrencyName { get; set; }
         public double Amount { get; set; }
@@ -16,48 +16,40 @@ namespace Task1
             CurrencyName = string.Empty;
             Amount = 0;
         }
-        public void Read(string Path)
+        public Currency(double am, string cur)
         {
-            FileInfo fileInfo = new FileInfo(Path);
-            if (!fileInfo.Exists)
-                throw new FileNotFoundException();
-            else
-            {
-                using (StreamReader streamReader = new StreamReader(fileInfo.FullName))
-                {
-                    string StringFromFile = string.Empty;
-                    try
-                    {
-                        StringFromFile = streamReader.ReadLine();
-                    }
-                    catch (Exception ex)
-                    {
-                        ex.ToString();
-                    }
-                    string[] StringArrayFromFile = StringFromFile.Split();
-                    try
-                    {
-                        Amount = Double.Parse(StringArrayFromFile[0]);
-                        CurrencyName = StringArrayFromFile[1];
-                    }
-                    catch (FormatException ex)
-                    {
-                        ex.ToString();
-                    }
-                }
-            }
+            Amount = am;
+            CurrencyName = cur;
         }
-        public void Write(string Path)
+        public void Read(StreamReader streamReader)
         {
-            FileInfo fileInfo = new FileInfo(Path);
-            if (!fileInfo.Exists)
-                fileInfo.Create();
-            using (StreamWriter streamWriter = new StreamWriter(fileInfo.FullName))
+            string temp = streamReader.ReadLine();
+            string[]splitString = temp.Split(',',' ',';');
+            double amount = 0;
+            try
             {
-                streamWriter.Write(Amount);
-                streamWriter.Write(CurrencyName);
+                if (splitString[0] == string.Empty || splitString[1] == string.Empty)
+                    throw new ArgumentNullException("There is nothing to read from file!");
             }
-        }
+            catch(ArgumentNullException argNullEx)
+            {
+                Console.WriteLine(argNullEx.ToString());
+            }
+            try
+            {
+                if ((!double.TryParse(splitString[0], out amount)))
+                    throw new FormatException("You try to convert not a number to a number!");
+            }
+            catch(FormatException ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            Amount = amount;
+            CurrencyName = splitString[1];
 
-    }
+        }
+           
+
+        
+    } 
 }
