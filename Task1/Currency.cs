@@ -7,19 +7,28 @@ using System.IO;
 
 namespace Task1
 {
-    class Currency : IReadable
+    internal enum CurrencyName
     {
-        public string CurrencyName { get; set; }
-        public double Amount { get; set; }
+        Grivna,
+        Dollar,
+        Euro
+    }
+    internal class Currency : IReadable
+    {
+        public bool HasMissingField { get; private set; }
+        public CurrencyName CurrName { get; private set; }        
+        public double Amount { get;private set; }
         public Currency()
         {
-            CurrencyName = string.Empty;
+            HasMissingField = false;
+            CurrName = default(Task1.CurrencyName);
             Amount = 0;
         }
-        public Currency(double am, string cur)
+        public Currency(double am, CurrencyName cur)
         {
+            HasMissingField = false;
             Amount = am;
-            CurrencyName = cur;
+            CurrName = cur;
         }
         public void Read(StreamReader streamReader)
         {
@@ -29,27 +38,46 @@ namespace Task1
             try
             {
                 if (splitString[0] == string.Empty || splitString[1] == string.Empty)
-                    throw new ArgumentNullException("There is nothing to read from file!");
+                    throw new ArgumentNullException();
+                else if ((!double.TryParse(splitString[0], out amount)))
+                    throw new FormatException();
+                else
+                {
+                    Amount = amount;
+                    string currName = splitString[1];
+                    switch (currName)
+                    {
+                        case "grn":
+                            CurrName = Task1.CurrencyName.Grivna;
+                            break;
+                        case "eur":
+                            CurrName = Task1.CurrencyName.Euro;
+                            break;
+                        case "dol":
+                            CurrName = Task1.CurrencyName.Dollar;
+                            break;
+                        default:
+                            HasMissingField = true;
+                            throw new Exception($"The is no such currency as { currName}");                           
+                    }
+                }
             }
             catch(ArgumentNullException argNullEx)
             {
-                Console.WriteLine(argNullEx.ToString());
-            }
-            try
-            {
-                if ((!double.TryParse(splitString[0], out amount)))
-                    throw new FormatException("You try to convert not a number to a number!");
+                Console.WriteLine(argNullEx.Message);
             }
             catch(FormatException ex)
             {
+                Console.WriteLine(ex.Message);
+            }
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex.ToString());
             }
-            Amount = amount;
-            CurrencyName = splitString[1];
-
         }
-           
-
-        
+        public override string ToString()
+        {
+            return string.Format($"Currency: {CurrName.ToString()};Amount: {Amount}");
+        }
     } 
 }
