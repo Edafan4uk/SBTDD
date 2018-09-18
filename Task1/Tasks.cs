@@ -7,70 +7,92 @@ using System.IO;
 
 namespace Task1
 {
+    /// <summary>
+    /// Main class with tasks.
+    /// </summary>
+    /// <remarks>
+    /// This class contains methods for implementing reading from a file, outputting only the Ukrainian currency,
+    /// converting currencies to one, deducting the amount of a particular currency.
+    /// </remarks>
     internal static class Tasks
     {
+        /// <value>List of all currencies.</value>
         private static List<Currency> currencies;
+        /// <value>List which contains sum of all currencies.</value>
         private static List<Currency> totAmount; 
 
+        /// <summary>
+        /// Reading pairs "currency - amount" from text file and print on console.
+        /// </summary>
         internal static void ReadFromFile()
         {
             try
             {
-                List<Currency> list = new List<Currency>();
-                if (!File.Exists(@"C:\Users\Oleg\SBTDD\Task1\ReadFromHere.txt"))
+                currencies = new List<Currency>(); // creating list of currencies
+                if (!File.Exists(@"C:\Users\Oleg\SBTDD\Task1\ReadFromHere.txt")) // check if there is a folder in the specified path
                     throw new FileNotFoundException();
-                using (StreamReader sr = File.OpenText(@"C:\Users\Oleg\SBTDD\Task1\ReadFromHere.txt"))
+                
+                using (StreamReader sr = File.OpenText(@"C:\Users\Oleg\SBTDD\Task1\ReadFromHere.txt")) // creating stream for reading data
                 {
+                    ///<value>Temporary variable for convenient reading. </value>
                     Currency tempCurr;
                     while(!sr.EndOfStream)
                     {
                         tempCurr = new Currency();
                         tempCurr.Read(sr);
-                        if(!tempCurr.HasMissingField)
-                            list.Add(tempCurr);
+                        if(!tempCurr.HasMissingField) // if data entered correctly, add to list of currencies
+                            currencies.Add(tempCurr);
                     }
                 }
-                currencies = list;
-                foreach (var item in list)
+                foreach (var item in currencies) // printing data on concole
                 {
                     Console.WriteLine(item);
                 }
             }
             catch(FileNotFoundException ex)
             {
+                //exception in case the file doesn`t open 
                 Console.WriteLine(ex.Message);
             }
             
         }
+        /// <summary>
+        /// Print only ukrainian currency.
+        /// </summary>
         internal static void PrintOnlyGrn()
         {
-            if (currencies != null)
+            if (currencies != null) // check if the list is empty
             {
-                var onlyGrn = from a in currencies where a.CurrName == CurrencyName.Grivna select a;
+                var onlyGrn = from a in currencies where a.CurrName == CurrencyName.Grivna select a; // variable onlyGrn contains only grivnas
                 foreach (var item in onlyGrn)
                 {
-                    Console.WriteLine(item);
+                    Console.WriteLine(item); // printing
                 }
             }
             else
             {
-                ReadFromFile();
+                ReadFromFile(); 
                 PrintOnlyGrn();
             }
         }
+
+        /// <summary>
+        /// Printing the sum of the desired currency
+        /// </summary>
         internal static void PrintingSumsOfSameCur()
         {
             if(currencies != null)
             {
+                ///<value>Contains a sum of each currency. </value>
                 var groupedByNames = from a in currencies
                                      group a by a.CurrName
                                      into g
-                                     select new Currency((from b in g select b.Amount).Sum(),g.Key);
+                                     select new Currency((from b in g select b.Amount).Sum(),g.Key);// Merge same cuurency together 
                 foreach (var item in groupedByNames)
                 {
                     Console.WriteLine(item);
                 }
-                totAmount = groupedByNames.ToList();
+                totAmount = groupedByNames.ToList(); 
                 
             }
             else
@@ -79,14 +101,17 @@ namespace Task1
                 PrintOnlyGrn();
             }
         }
+        /// <summary>
+        /// Convert all currencies to one.
+        /// </summary>
         internal static void ConvertingAllCurrenciesToOne()
         {
             if(totAmount!=null)
             {
                 Console.WriteLine("That`s all of the money we have in stock:");
-                foreach (var item in totAmount)
+                foreach (var item in totAmount) // printing amount of each currency
                 {
-                    Console.WriteLine($"-{item}");
+                    Console.WriteLine($"-{item}"); 
                 }
 
                 Console.WriteLine("\nPlease choose the currency, in which you would like to receive your money:\n");
@@ -100,7 +125,7 @@ namespace Task1
                     Console.WriteLine("---Press 2 to convert into grivnas");
                     Console.WriteLine("---Press 3 to convert into euros");
                     buttonPressed = Console.ReadLine();
-                    if(buttonPressed!= "1"&&buttonPressed!="2"&&buttonPressed!="3")
+                    if(buttonPressed!= "1"&&buttonPressed!="2"&&buttonPressed!="3") //сусle while stops only when user enter correct data (1,2,3)
                     {
                         Console.WriteLine("Please try again!");
                         isAvailable = false;
@@ -108,7 +133,7 @@ namespace Task1
                     }
                 }
                 Currency converted= null;
-                switch(buttonPressed)
+                switch(buttonPressed) // Printing results depends on what user entered
                 {
                     case "1":
                         converted = CurrencyConverter.ConvertTo2(CurrencyName.Dollar, totAmount);
