@@ -57,7 +57,7 @@ namespace Task1
             
         }
         /// <summary>
-        /// Print only ukrainian currency.
+        /// This method prints only ukrainian currency.
         /// </summary>
         internal static void PrintOnlyGrn()
         {
@@ -106,7 +106,7 @@ namespace Task1
         /// </summary>
         internal static void ConvertingAllCurrenciesToOne()
         {
-            if(totAmount!=null)
+            if(totAmount!=null) // Check if toatal amount list isnt empty
             {
                 Console.WriteLine("That`s all of the money we have in stock:");
                 foreach (var item in totAmount) // printing amount of each currency
@@ -125,7 +125,7 @@ namespace Task1
                     Console.WriteLine("---Press 2 to convert into grivnas");
                     Console.WriteLine("---Press 3 to convert into euros");
                     buttonPressed = Console.ReadLine();
-                    if(buttonPressed!= "1"&&buttonPressed!="2"&&buttonPressed!="3") //сусle while stops only when user enter correct data (1,2,3)
+                    if(buttonPressed!= "1"&&buttonPressed!="2"&&buttonPressed!="3") //сусle while continue untill user enter correct data (1,2,3)
                     {
                         Console.WriteLine("Please try again!");
                         isAvailable = false;
