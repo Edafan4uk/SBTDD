@@ -66,31 +66,33 @@ namespace Task1
                 }
             return new Currency(sumOfAll, currName);                      
         }
-        public static Currency ConvertTo(string curToConvert,Currency currency)
+        public static Currency ConvertTo(CurrencyName currName, Currency currency)
         {
-            double amount = 0;
-            amount = currency.Amount;
-            string cur = string.Empty;
-            if (curToConvert == "$"||curToConvert == "dol")
+            double amount = currency.Amount;
+            if (currName == currency.CurrName)
+            {
+                return new Currency(currency.Amount, currency.CurrName);
+            }
+            else if (currName == CurrencyName.Dollar)
             {
                 if (currency.CurrName == CurrencyName.Euro)
-                    return new Currency(amount * 0.8, CurrencyName.Euro);
+                    return new Currency(amount * 1.2, CurrencyName.Dollar);
                 else
-                    return new Currency(amount * 27, CurrencyName.Dollar);
+                    return new Currency(amount / 27, CurrencyName.Dollar);
             }
-            else if (curToConvert == "E"||curToConvert == "eur")
+            else if (currName == CurrencyName.Grivna)
             {
                 if (currency.CurrName == CurrencyName.Dollar)
-                    return new Currency(amount * 1.2,CurrencyName.Dollar);
+                    return new Currency(amount * 27, CurrencyName.Grivna);
                 else
                     return new Currency(amount * 30, CurrencyName.Grivna);
             }
             else
             {
-                if (currency.CurrName == CurrencyName.Euro)
-                    return new Currency(amount / 30, CurrencyName.Euro);
+                if (currency.CurrName == CurrencyName.Dollar)
+                    return new Currency(amount * 0.8, CurrencyName.Euro);
                 else
-                    return new Currency(amount / 27, CurrencyName.Dollar);
+                    return new Currency(amount / 30, CurrencyName.Euro);
             }
         }
     }
