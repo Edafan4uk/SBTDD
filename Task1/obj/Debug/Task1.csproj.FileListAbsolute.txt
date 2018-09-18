@@ -19,3 +19,10 @@ C:\Users\Oleg\SBTDD\Task1\obj\Debug\Task1.csprojResolveAssemblyReference.cache
 C:\Users\Oleg\SBTDD\Task1\obj\Debug\Task1.csproj.CoreCompileInputs.cache
 C:\Users\Oleg\SBTDD\Task1\obj\Debug\Task1.exe
 C:\Users\Oleg\SBTDD\Task1\obj\Debug\Task1.pdb
+C:\GitHub\SBTDD\Task1\bin\Debug\Task1.exe.config
+C:\GitHub\SBTDD\Task1\bin\Debug\Task1.exe
+C:\GitHub\SBTDD\Task1\bin\Debug\Task1.pdb
+C:\GitHub\SBTDD\Task1\obj\Debug\Task1.csprojAssemblyReference.cache
+C:\GitHub\SBTDD\Task1\obj\Debug\Task1.csproj.CoreCompileInputs.cache
+C:\GitHub\SBTDD\Task1\obj\Debug\Task1.exe
+C:\GitHub\SBTDD\Task1\obj\Debug\Task1.pdb
