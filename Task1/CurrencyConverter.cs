@@ -6,8 +6,18 @@ using System.Threading.Tasks;
 
 namespace Task1
 {
+    //
+    /// <summary>
+    /// CurrencyConverter клас містить методи конвертації валют
+    /// </summary>
     static class CurrencyConverter
     {
+        /// <summary>
+        /// Сумує список різних валют в одну валюту
+        /// </summary>
+        /// <param name="currName">Назва валюти</param>
+        /// <param name="list">Список валют</param>
+        /// <returns>Повертає суму всіх валют в одній валюті</returns>
         public static Currency ConvertTo2(CurrencyName currName,List<Currency> list)
         {
             
@@ -66,6 +76,12 @@ namespace Task1
                 }
             return new Currency(sumOfAll, currName);                      
         }
+        /// <summary>
+        /// Конвертує валюту в бажану валюту
+        /// </summary>
+        /// <param name="currName">Назва валюти на яку ми хочемо конвертувати</param>
+        /// <param name="currency">Конвертована валюта</param>
+        /// <returns>Повертає конвертовану валюту</returns>
         public static Currency ConvertTo(CurrencyName currName, Currency currency)
         {
             double amount = currency.Amount;
